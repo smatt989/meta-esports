@@ -13,6 +13,9 @@ trait SessionRoutes extends SlickRoutes with AuthenticationSupport{
   get("/sessions/new"){
     contentType = formats("json")
     authenticate()
+
+    response.setHeader("Access-Control-Expose-Headers", SessionTokenStrategy.HeaderKey)
+
     user.toJson
   }
 

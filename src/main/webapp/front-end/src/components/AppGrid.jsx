@@ -7,10 +7,14 @@ import {loadAdventure, loadAdventureSuccess, loadAdventureError, forceMapCenter,
 import {MapWrapperContainer} from './MapWrapper';
 import {ObjectListContainer} from './ObjectList';
 import {TriggerListContainer} from './TriggerList';
-import {NavBar} from './NavBar';
+import {NavBarContainer} from './NavBar';
 import {MapToolbarContainer} from './MapToolbar';
 import {MarkerInfoContainer} from './MarkerInfo';
+import {ContentItemGridContainer} from './ContentItemGrid';
 import {TriggerInfoContainer} from './TriggerInfo';
+import {GameFormContainer} from './GameForm';
+import {ContentFormContainer} from './ContentForm';
+import {LoginFormContainer} from './LoginForm';
 
 const AppGrid = React.createClass({
     mixins: [PureRenderMixin],
@@ -30,26 +34,16 @@ const AppGrid = React.createClass({
         return <Grid>
             <Row>
                 <Col>
-                    <NavBar />
+                    <NavBarContainer />
                     <MarkerInfoContainer />
                     <TriggerInfoContainer />
+                    <GameFormContainer />
+                    <ContentFormContainer />
+                    <LoginFormContainer />
                 </Col>
             </Row>
             <Row className="show-grid">
-                <Col lg={8}>
-                    <MapToolbarContainer />
-                    <MapWrapperContainer />
-                </Col>
-                <Col lg={4}>
-                    <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                        <Tab eventKey={1} title="Objects">
-                            <ObjectListContainer />
-                        </Tab>
-                        <Tab eventKey={2} title="Triggers">
-                            <TriggerListContainer />
-                        </Tab>
-                     </Tabs>
-                </Col>
+               <ContentItemGridContainer />
             </Row>
         </Grid>
     }
@@ -58,25 +52,13 @@ const AppGrid = React.createClass({
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        loadAdventure: (adventureId) => {
-            dispatch(loadAdventure(adventureId)).then((response) => {
-                        if(!response.error){
-                            dispatch(loadAdventureSuccess(response.payload.data));
-                            dispatch(forceMapCenter());
-                        } else {
-                            dispatch(loadAdventureError(response.error));
-                        }
-            })
-        },
-        setAdventureId: (id) => {
-            dispatch(setAdventureId(id));
-        }
+
     }
 }
 
 function mapStateToProps(state) {
   return {
-    adventureId: state.get('id')
+
   };
 }
 

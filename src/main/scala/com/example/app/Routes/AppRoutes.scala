@@ -21,4 +21,43 @@ trait AppRoutes extends SlickRoutes with AuthenticationSupport{
         </html>
   }
 
+  get("/games"){
+    contentType = formats("json")
+
+    Game.getAll
+  }
+
+  post("/games/save") {
+    contentType = formats("json")
+    authenticate()
+
+    val game = parsedBody.extract[Game]
+
+    Game.save(game)
+  }
+
+  post("/games/content/save"){
+    contentType = formats("json")
+    authenticate()
+
+    val item = parsedBody.extract[OneFullContentItem]
+
+    OneFullContentItem.save(item)
+  }
+
+  post("/games/content/:id/remove") {
+    contentType = formats("json")
+    authenticate()
+
+    val contentItemId = {params("id")}.toInt
+
+    VersionAcceptance.demoteVersions(contentItemId)
+  }
+
+  get("/games/content/all") {
+    contentType = formats("json")
+
+    OneFullContentItem.getAll()
+  }
+
 }

@@ -4,7 +4,7 @@ import {Router, Route, hashHistory} from 'react-router';
 import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import reducer from './reducer';
-import {setState, loadTriggerElementSubTypes, loadTriggerElementSubTypesSuccess, loadTriggerElementSubTypesError, cleanState} from './action_creators';
+import {loadGames, loadGamesSuccess, loadGamesError, cleanState, loadContentItems, loadContentItemsSuccess, loadContentItemsError} from './action_creators';
 import App from './components/App';
 import {List, Map} from 'immutable';
 import promise from 'redux-promise';
@@ -19,13 +19,18 @@ const store = createStoreWithMiddleware(reducer, window.__REDUX_DEVTOOLS_EXTENSI
 
 store.dispatch(cleanState());
 
-store.dispatch(loadTriggerElementSubTypes()).then((response) => {
-               !response.error ? store.dispatch(loadTriggerElementSubTypesSuccess(response.payload.data)) : store.dispatch(loadTriggerElementSubTypesError(response.error));
+store.dispatch(loadGames()).then((response) => {
+               !response.error ? store.dispatch(loadGamesSuccess(response.payload.data)) : store.dispatch(loadGamesError(response.error));
            });
+store.dispatch(loadContentItems()).then((response) => {
+                !response.error ? store.dispatch(loadContentItemsSuccess(response.payload.data)) : store.dispatch(loadContentItemsError(response.error));
+            });
+
 
 const routes = <Route component={App}>
   <Route path="/" component={AppGridContainer} />
   <Route path="/adventures/:adventureId/edit" component={AppGridContainer} />
+  <Route path="/games/new" />
 </Route>;
 
 
