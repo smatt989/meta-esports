@@ -18,7 +18,7 @@ trait AppRoutes extends SlickRoutes with AuthenticationSupport{
         <body>
           <div id="app"></div>
           <script src = "https://www.youtube.com/iframe_api"></script>
-          <script src= "http://player.twitch.tv/js/embed/v1.js"></script>
+          <script src= "https://player.twitch.tv/js/embed/v1.js"></script>
           <script src="/front-end/dist/bundle.js"></script>
         </body>
       </html>
