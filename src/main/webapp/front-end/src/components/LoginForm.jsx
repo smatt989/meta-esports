@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {Modal, Button, FormControl} from 'react-bootstrap';
 import {login, loginSuccess, loginError, createLoginUser, finishedLoginUser} from '../action_creators';
 import {authenticationHeader} from '../utilities';
-import {markerByKey} from '../utilities';
 import {gameBuilder} from '../models/Game';
 
 var _ = require('lodash');

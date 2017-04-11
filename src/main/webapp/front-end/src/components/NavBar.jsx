@@ -22,8 +22,16 @@ const NavBar = React.createClass({
 
         var loginLogoutButton = null
 
+        var divider = null
+        var addGameButton = null
+
+        var newContentButton = null
+
         if(this.getSession() != null) {
-            loginLogoutButton = <NavItem onClick={logout} eventKey={1} href="#">Logout</NavItem>
+            loginLogoutButton = <NavItem onClick={logout} eventKey={1} href="#">Logout</NavItem>;
+            divider = <MenuItem divider />
+            addGameButton = <MenuItem onClick={startEditingGame} eventKey={3.3}>New Game</MenuItem>;
+            newContentButton = <NavItem onClick={startEditingContentItem} eventKey={2} href="#">New Content</NavItem>
         } else {
             loginLogoutButton = <NavItem onClick={createLoginUser} eventKey={1} href="#">Login</NavItem>
         }
@@ -31,7 +39,7 @@ const NavBar = React.createClass({
         return <Navbar inverse collapseOnSelect>
                    <Navbar.Header>
                      <Navbar.Brand>
-                       <a href="#">Map Editor</a>
+                       <a href="#">META</a>
                      </Navbar.Brand>
                      <Navbar.Toggle />
                    </Navbar.Header>
@@ -41,10 +49,10 @@ const NavBar = React.createClass({
                         {this.getGames().map((game) =>
                             <MenuItem key={game.get('id')}>{game.get('name')}</MenuItem>
                         )}
-                         <MenuItem divider />
-                         <MenuItem onClick={startEditingGame} eventKey={3.3}>New Game</MenuItem>
+                        {divider}
+                        {addGameButton}
                        </NavDropdown>
-                       <NavItem onClick={startEditingContentItem} eventKey={2} href="#">New Content</NavItem>
+                       {newContentButton}
                      </Nav>
                      <Nav pullRight>
                        {loginLogoutButton}

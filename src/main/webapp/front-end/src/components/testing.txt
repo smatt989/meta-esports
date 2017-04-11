@@ -1,0 +1,18 @@
+<Col xs={12} md={6}>
+                    <Media>
+                      <Media.Left width={300}>
+                        <div width={300}>
+                            {thumbnail}
+                            <RatingContainer rating={this.contentItem().get("rating")} />
+                            <StatusIndicatorContainer started={this.contentItem().get("started")} ended={this.contentItem().get("ended")} startMillis={this.contentItem().get("startMillis")} />
+                            <br />
+                            <em>{moment(new Date(this.contentItem().get("startMillis"))).format("dddd, MMMM Do YYYY, h:mm a")}</em>
+                        </div>
+                      </Media.Left>
+                      <Media.Body>
+                        <Media.Heading>{this.contentItem().get("name")}</Media.Heading>
+                            <p id={this.thumbnailId() + "p"}>{this.contentItem().get("description")}</p>
+                            {editButton}
+                        </Media.Body>
+                    </Media>
+                </Col>

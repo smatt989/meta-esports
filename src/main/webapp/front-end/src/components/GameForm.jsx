@@ -4,7 +4,6 @@ import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {connect} from 'react-redux';
 import {Modal, Button, FormControl} from 'react-bootstrap';
 import {startEditingGame, endEditingGame, updateEditingGameName, saveGame, saveGameSuccess, saveGameError, loadGames, loadGamesSuccess, loadGamesError} from '../action_creators';
-import {markerByKey} from '../utilities';
 import {gameBuilder} from '../models/Game';
 
 var _ = require('lodash');

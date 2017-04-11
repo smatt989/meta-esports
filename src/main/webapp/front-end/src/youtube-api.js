@@ -4,7 +4,7 @@ export function playVideo(videoId, divId){
     var done = false;
 
     function onPlayerReady(event) {
-       event.target.setVolume(0);
+        event.target.mute();
         event.target.playVideo();
     }
 
@@ -12,12 +12,11 @@ export function playVideo(videoId, divId){
         if (event.data == YT.PlayerState.PLAYING && !done) {
                   done = true;
         }
-       event.target.mute();
     }
 
     player = new YT.Player(divId, {
       height: '150',
-      width: '300',
+      width: '100%',
       videoId: videoId,
       events: {
         'onReady': onPlayerReady,
@@ -39,7 +38,6 @@ export function twitchRegex() {
 }
 
 export function isAYoutubeLink(link) {
-    console.log("LINK: "+link)
     return youtubeRegex().test(link)
 }
 

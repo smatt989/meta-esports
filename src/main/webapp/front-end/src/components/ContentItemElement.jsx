@@ -5,7 +5,9 @@ import {connect} from 'react-redux';
 import {Modal, Button, FormControl, Col, Thumbnail} from 'react-bootstrap';
 import {startEditingContentItem} from '../action_creators';
 import {playVideo, isAYoutubeLink, isATwitchLink, youtubeVideoId, twitchVideoId} from '../youtube-api'
-import {markerByKey} from '../utilities';
+import {RatingContainer} from './Rating';
+import {StatusIndicatorContainer} from './StatusIndicator';
+import moment from 'moment';
 
 var _ = require('lodash');
 
@@ -16,11 +18,11 @@ const ContentItemElement = React.createClass({
   },
   componentDidMount: function() {
     const linkToUse = this.linkToUse()
-    console.log("LINK TO USE: "+linkToUse)
     if(linkToUse != null){
         const link = this.contentItem().get(linkToUse)
         this.createPlayerFromLink(link);
     }
+    document.getElementById(this.thumbnailId() + "p").innerHTML = this.contentItem().get("description");
   },
   linkToUse: function() {
     const vodLink = this.contentItem().get("vodLink")
@@ -72,6 +74,7 @@ const ContentItemElement = React.createClass({
     return "item"+this.contentItem().get("id")
   },
   render: function() {
+        const hasSession = this.props.session != null
 
         const startEditingContentItem = this.props.startEditingContentItem
 
@@ -90,18 +93,25 @@ const ContentItemElement = React.createClass({
             thumbnail = imageDiv
         }
 
-        return <Col xs={6} md={4}>
+        var editButton = null
+        if(hasSession){
+            editButton = <p><Button bsStyle="default" onClick={() => startEditingContentItem(this.contentItem())}>Edit</Button>&nbsp;</p>
+        }
+
+        return <Col xs={6} md={4} lg={3}>
                   <Thumbnail >
                     <div>
 
                     {thumbnail}
                     </div>
 
-                    <h3>{this.contentItem().get("name")}</h3>
-                    <p>{this.contentItem().get("description")}</p>
-                    <p>
-                      <Button bsStyle="default" onClick={() => startEditingContentItem(this.contentItem())}>Edit</Button>&nbsp;
-                    </p>
+                    <h4>{this.contentItem().get("name")}</h4>
+                    <RatingContainer rating={this.contentItem().get("rating")} />
+                    <StatusIndicatorContainer started={this.contentItem().get("started")} ended={this.contentItem().get("ended")} startMillis={this.contentItem().get("startMillis")} />
+                    <br />
+                    <em>{moment(new Date(this.contentItem().get("startMillis"))).format("dddd, MMMM Do YYYY, h:mm a")}</em>
+                    <p id={this.thumbnailId() + "p"}>{this.contentItem().get("description")}</p>
+                    {editButton}
                   </Thumbnail>
                 </Col>
   }
@@ -109,7 +119,8 @@ const ContentItemElement = React.createClass({
 
 function mapStateToProps(state) {
   return {
-    editingGame: state.get('editingGame')
+    editingGame: state.get('editingGame'),
+    session: state.getIn(['login', 'session'])
   };
 }
 
