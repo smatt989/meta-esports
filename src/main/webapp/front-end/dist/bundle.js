@@ -51557,7 +51557,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var fullstack = false;
+	var fullstack = true;
 	var domain = fullstack ? "" : "http://localhost:8080";
 
 	var mapzen = "https://search.mapzen.com/v1/search";
