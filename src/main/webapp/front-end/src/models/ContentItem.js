@@ -19,7 +19,7 @@ export function contentItemBuilder(gameId, name, description, startMillis, start
 
 export function defaultContentItem() {
     return contentItemBuilder(
-        3,
+        1,
         "",
         "",
         initialStartDate(),

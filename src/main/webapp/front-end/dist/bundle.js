@@ -51319,7 +51319,7 @@
 	}
 
 	function defaultContentItem() {
-	    return contentItemBuilder(3, "", "", initialStartDate(), false, false, 2);
+	    return contentItemBuilder(1, "", "", initialStartDate(), false, false, 2);
 	}
 
 	function initialStartDate() {
