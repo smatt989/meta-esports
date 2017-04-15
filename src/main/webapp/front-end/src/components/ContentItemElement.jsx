@@ -67,7 +67,7 @@ const ContentItemElement = React.createClass({
         playVideo(id, thumbnailId)
     } else if (isATwitchLink(link)){
         const id = twitchVideoId(link)
-        var player = new Twitch.Player(thumbnailId, {channel: id});
+        var player = new Twitch.Player(thumbnailId, {channel: id, muted: true});
     }
   },
   thumbnailId: function() {

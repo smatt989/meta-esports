@@ -73877,7 +73877,7 @@
 	            (0, _youtubeApi.playVideo)(id, thumbnailId);
 	        } else if ((0, _youtubeApi.isATwitchLink)(link)) {
 	            var _id = (0, _youtubeApi.twitchVideoId)(link);
-	            var player = new Twitch.Player(thumbnailId, { channel: _id });
+	            var player = new Twitch.Player(thumbnailId, { channel: _id, muted: true });
 	        }
 	    },
 	    thumbnailId: function thumbnailId() {
